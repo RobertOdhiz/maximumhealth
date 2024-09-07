@@ -50,7 +50,7 @@
 
 .card:hover h5 {
   text-decoration: underline; /* Underline on hover */
-  color: #ff4400;
+  /* color: #ff4400; */
 }
 
 /* Card Description */

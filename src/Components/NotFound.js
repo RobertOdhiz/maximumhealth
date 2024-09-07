@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Styles/NotFound.css'
+import Navbar from './SemiComponents/Navbar';
 function NotFound() {
   const navigate = useNavigate();
 

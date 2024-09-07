@@ -1,112 +1,271 @@
+/* Navigation Bar Styles */
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .5em .75em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5em .75em;
+  background-color: #f8f9fa; /* Light background color for the nav bar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for better separation */
 }
 
 .sidenav ul {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 1em;
 }
 
 nav h3 {
-    font-weight: 500;
-    border-left: 2px solid black;
-    padding: .5em .75em;
-    color: #000;
-    cursor: pointer;
+  font-weight: 500;
+  border-left: 2px solid black;
+  padding: .5em .75em;
+  color: #000;
+  cursor: pointer;
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+nav h3:hover {
+  color: #007bff; /* Change color on hover */
 }
 
 .sidenav ul li {
-    list-style: none;
-    font-size: medium;
-    background-color: #000000a9;
-    color: white;
-    padding: .5em .75em;
-    border-radius: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  list-style: none;
+  font-size: medium;
+  background-color: #000000a9; /* Semi-transparent black for the menu items */
+  color: white;
+  padding: .5em .75em;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
+.sidenav ul li:hover {
+  background-color: #333; /* Darker background on hover */
+}
+
+/* Search Bar Styles */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  outline: none;
+  font-size: 1em;
+  width: 200px; /* Adjust width as needed */
+  transition: width 0.3s;
+}
+
+.search-bar:focus {
+  width: 250px; /* Expand width on focus */
+}
+
+.search-btn {
+  background-color: #f57c00; /* Orange background for search button */
+  border: none;
+  border-radius: 50%;
+  padding: 0.5em;
+  margin-left: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
+}
+
+.search-btn:hover {
+  background-color: #e64a19; /* Darker orange shade on hover */
+  transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Top Page Styles */
 .top-page {
-    position: relative;
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.top-page .img-container {
+  padding: 1em 1.5em;
+  border-radius: 8px;
+}
+
+.top-page img {
+  object-fit: cover;
+  width: 100%;
+  height: 500px;
+  border-radius: 8px;
+  transition: transform 0.5s; /* Smooth zoom effect */
+}
+
+.top-page img:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.top-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  padding: 1em 2em;
+  backdrop-filter: blur(4px); /* Blurred background effect for readability */
+  border-radius: 4px;
+  box-shadow: inset;
+  width: 80%;
+  transition: opacity 0.5s; /* Smooth fade effect */
+}
+
+.top-content .btn {
+  background-color: transparent; /* Transparent background with border */
+  border: 1px solid #fff;
+  border-radius: 4px;
+  font-size: 1.5em;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
+}
+
+.top-content .btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Slight background change on hover */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.top-content p {
+  font-size: 2em;
+  color: #fff;
+  margin-top: 0; /* Remove margin to keep close to the heading */
+}
+
+.top-content h1 {
+  font-size: 4em;
+  color: #000; /* Black color for the main heading */
+  margin-bottom: 0; /* Remove margin to keep close to the description */
+}
+
+/* Products Section Styles */
+.products-container {
+  padding: 0.5em 0.75em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center align text and content */
+  gap: 1em;
+  text-align: center; /* Center align text */
+}
+
+.products-container h2 {
+  font-size: 2.5em;
+  color: #333; /* Darker color for emphasis */
+  font-weight: 700; /* Bolder font for heading */
+  margin-bottom: 0; /* Remove margin below the heading */
+}
+
+.products-container .products-description {
+  font-size: 1.2em;
+  color: #666; /* Lighter color for description text */
+  font-weight: 500; /* Medium font weight for description */
+  margin-top: 0; /* Remove margin above the description */
+}
+
+.products {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 1em 1.5em;
+  /* width: 100%; */
+}
+
+.products img {
+  width: 100%;
+  height: auto;
+}
+
+.view-all-btn {
+  background-color: #f57c00; /* Orange background */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background color and scale */
+  width: 180px; /* Adjust width for consistency */
+  align-self: center; /* Align button to the left */
+  margin-top: 1em; /* Space above the button */
+}
+
+.view-all-btn:hover {
+  background-color: #e64a19; /* Darker orange shade on hover */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidenav ul {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .search-container {
+    margin-top: 1em;
+  }
+
+  .search-bar {
     width: 100%;
-    border-radius: 8px;
-  }
-
-  .top-page .img-container {
-    /* width: 100%; */
-    padding: 1em 1.5em;
-    border-radius: 8px;
-  }
-  
-  .top-page img {
-    object-fit: cover;
-    width: 100%;
-    height: 500px;
-    border-radius: 8px;
-  }
-  
-  .top-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    padding: 1em 2em;
-    backdrop-filter: blur(4px);
-    border-radius: 4px;
-    box-shadow: inset;
-    width: 80%;
-  }
-  
-  .top-content .btn {
-    background-color: transparent;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    font-size: 1.5em;
-    color: #fff;
-    padding: 10px 20px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-
-  .top-content p {
-    font-size: 2em;
-    color: #fff;
-  }
-
-  .top-content h1 {
-    font-size: 4em;
-    color: #000;
   }
 
   .products {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 1em;
-    padding: 1em 1.5em;
-  }
-
-  .products-container {
-    padding: .5em .75em;
-    display: flex;
     flex-direction: column;
-    align-items: left;
-    gap: 1em;
+    align-items: center;
   }
 
-  .products-container h2 {
-    font-size: 2em;
-    padding-left: 1em;
+  .products img {
+    width: 100%;
+    height: auto;
   }
+
+  .view-all-btn {
+    font-size: 1em;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-page img {
+    height: 300px;
+  }
+
+  .top-content h1 {
+    font-size: 2em;
+  }
+
+  .top-content p {
+    font-size: 1.2em;
+  }
+
+  .top-content .btn {
+    font-size: 1em;
+  }
+
+  .view-all-btn {
+    width: 120px; /* Adjust width for mobile screens */
+  }
+}

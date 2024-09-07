@@ -1,0 +1,158 @@
+/* Selected Product Page Styles */
+.selected-product-container {
+    padding: 2em;
+    background-color: #f9f9f9;
+  }
+  
+  .product-details {
+    display: flex;
+    gap: 1.5em; /* Reduced gap between image and content */
+    align-items: flex-start;
+    margin-bottom: 1.5em;
+    overflow: hidden;
+  }
+  
+  .product-image {
+    flex: 0 0 auto;
+    width: 35%; /* Reduced width to decrease height proportionally */
+    max-height: 400px; /* Reduced max height for the image */
+    position: sticky;
+    top: 20px;
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-info-container {
+    flex: 1;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 1em;
+  }
+  
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em; /* Reduced gap between elements */
+  }
+  
+  .product-info h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .product-description {
+    font-size: 1.1em;
+    color: #666;
+  }
+  
+  .product-price {
+    font-size: 1.4em;
+    color: #f57c00;
+    font-weight: bold;
+    margin-top: 0.2em; /* Reduced margin to decrease gap */
+  }
+  
+  .product-actions {
+    display: flex;
+    gap: 0.8em; /* Slightly reduced gap between buttons */
+    margin-top: 0.8em;
+  }
+  
+  .product-actions .btn {
+    padding: 0.7em 1.2em;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .primary-btn {
+    background-color: #f57c00;
+    color: white;
+  }
+  
+  .primary-btn:hover {
+    background-color: #e64a19;
+  }
+  
+  .secondary-btn {
+    background-color: white;
+    color: #f57c00;
+    border: 1px solid #f57c00;
+  }
+  
+  .secondary-btn:hover {
+    background-color: #f57c00;
+    color: white;
+  }
+  
+  .related-products {
+    margin-top: 1.5em; /* Reduced margin for less space */
+  }
+  
+  .related-products h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  
+  .products-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+  }
+  
+  .products-list .card {
+    flex: 1 1 calc(25% - 1em);
+    max-width: 300px;
+    box-sizing: border-box;
+  }
+  
+  @media (max-width: 768px) {
+    .product-details {
+      flex-direction: column;
+    }
+  
+    .product-info h1 {
+      font-size: 1.8em;
+    }
+  
+    .product-description {
+      font-size: 1em;
+    }
+  
+    .product-price {
+      font-size: 1.2em;
+    }
+  
+    .products-list .card {
+      flex: 1 1 calc(50% - 1em);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .product-info h1 {
+      font-size: 1.4em;
+    }
+  
+    .product-description {
+      font-size: 0.9em;
+    }
+  
+    .product-price {
+      font-size: 1em;
+    }
+  
+    .products-list .card {
+      flex: 1 1 100%;
+    }
+  }
+  

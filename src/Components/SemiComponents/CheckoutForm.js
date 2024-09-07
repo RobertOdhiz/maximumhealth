@@ -10,7 +10,8 @@ function CheckoutForm(props) {
         name: '',
         email: '',
         county: '',
-        location: ''
+        location: '',
+        item: props?.title
     });
 
     const handleSubmit = (e) => {
