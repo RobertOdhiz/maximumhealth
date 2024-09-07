@@ -1,0 +1,10 @@
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    font-style: normal;
+    font-size: medium;
+    padding: 2em;
+    font-weight: 100;
+}

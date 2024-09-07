@@ -1,0 +1,85 @@
+/* Card Container */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 240px;
+  margin: 20px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Card Hover Effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Image */
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 2px solid #ff4400;
+  transition: opacity 0.3s;
+}
+
+.card:hover .card-image {
+  opacity: 0.9;
+}
+
+/* Card Text */
+.card-text {
+  padding: 15px 15px 15px 25px; /* Add padding to the left */
+  text-align: left;
+  width: 100%;
+}
+
+/* Card Title */
+.card-text h5 {
+  font-size: 1.4em;
+  margin: 0;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.card:hover h5 {
+  text-decoration: underline; /* Underline on hover */
+  color: #ff4400;
+}
+
+/* Card Description */
+.card-text p {
+  color: #666;
+  font-size: 1em;
+  margin: 8px 0;
+  font-family: 'Arial', sans-serif;
+  font-style: italic; /* Make the description italic */
+}
+
+/* Card Price */
+.card-price {
+  color: #ff4400;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 5px;
+  font-family: 'Arial', sans-serif;
+  font-style: italic; /* Make the price italic */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .card {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .card-image {
+    height: 160px;
+  }
+}
