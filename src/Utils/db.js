@@ -4,9 +4,10 @@ const BASE_URL = "https://script.google.com/macros/s/AKfycbzj4GdlOYKzVmfLeyEVhVc
 // Utility function to handle HTTP requests
 const request = async (method, endpoint, body = null) => {
   const options = {
+    redirect: "follow",
     method,
     headers: {
-      'Content-Type': 'application/json',
+        "Content-Type": "text/plain;charset=utf-8",
     },
   };
   if (body) {
