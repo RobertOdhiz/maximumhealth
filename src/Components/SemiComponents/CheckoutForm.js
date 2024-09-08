@@ -31,17 +31,18 @@ function CheckoutForm({ item }) {
 
         try {
             // Construct the data object for the API
-            const orderData = {
+            const postData = {
                 ...formData,
                 item: item.name,
                 price: item.price,
                 amount: calculateTotal(),
             };
 
-            console.log("Order data: ", orderData);
+            console.log("Order data: ", postData);
 
             // Send POST request to place the order
-            const response = await createRecord('Sheet2', orderData); // Replace 'Sheet2' with your actual sheet name
+            const response = await createRecord('orders', postData); // Replace 'Sheet2' with your actual sheet name
+            console.log("Order response: ", response);
 
             if (response.message === 'Data successfully written') {
                 toast.success('Order placed successfully!');
