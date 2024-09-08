@@ -1,0 +1,202 @@
+/* Navigation Bar Styles */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5em .75em;
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Needed for positioning the menu toggle button */
+  }
+  
+  .logo {
+    cursor: pointer;
+    font-size: 1.5em; /* Default font size for the logo */
+  }
+  
+  .menu-toggle {
+    display: none; /* Hide the menu toggle button by default */
+    font-size: 1.5em;
+    cursor: pointer;
+    margin: .5em;
+    position: sticky;
+    background-color: #f8f9fa;
+    border: none;
+  }
+  
+  .sidenav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidenav ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1em;
+  }
+  
+  .sidenav ul li {
+    list-style: none;
+    font-size: medium;
+    /* background-color: #000000a9; */
+    color: #000000a9;
+    padding: .5em .75em;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color .3s;
+  }
+  
+  .sidenav ul li .menu-text {
+    display: none; /* Hide text in the default view */
+    margin-left: 0.5em;
+  }
+  
+  .sidenav ul li:hover {
+    background-color: #ff4500;
+    color: #f8f9fa;
+  }
+  
+  /* Search Bar Styles */
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar {
+    padding: 0.5em .75em;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 1em;
+    width: 200px; /* Default width */
+    /* transition: width 0.3s; */
+    /* display: none; Hide the search input by default on mobile */
+  }
+  
+  .search-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    padding: 0.5em;
+    margin-left: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .search-btn:hover {
+    /* background-color: #e64a19; */
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .logo {
+      font-size: 1em; /* Reduce font size of the logo on mobile */
+    }
+  
+    .menu-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .sidenav {
+      display: none; /* Hide the sidenav by default */
+      /* flex-direction: column; */
+      /* width: 100%; */
+      background-color: #f8f9fa;
+      position: absolute;
+      top: 3em; /* Position below the menu toggle */
+      transition: transform 0.3s ease;
+      z-index: 1000; /* Ensure it appears above other content */
+    }
+  
+    /* Updated .sidenav.open Styles */
+.sidenav.open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align items to the start of the container */
+    justify-content: flex-end; /* Align items to the top of the container */
+    position: fixed; /* Fix position relative to the viewport */
+    top: 4em; /* Adjust this value if needed to position below the menu toggle */
+    padding: .5em .75em;
+    right: 1em;
+    border-radius: 8px;
+    background-color: #f8f9fa; /* Background color for visibility */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+    z-index: 1000; /* Ensure it appears above other content */
+  }
+  
+  
+    .sidenav ul {
+      flex-direction: column;
+      gap: 1em;
+      /* justify-content: flex-start; */
+      align-items: end;
+    }
+  
+    .sidenav ul li {
+      font-size: 1em;
+      background-color: transparent;
+      color: black;
+      border: 1px solid ;
+      padding: 1em;
+      border-radius: 0;
+      width: 100%;
+      align-items: flex-start;
+      justify-content: start;
+      border-radius: 4px;
+      transition: background-color .3s, border .3s;
+    }
+
+    .sidenav ul li:hover,
+    .sidenav ul li:focus {
+        background-color: #ff4500;
+        border: none;
+        color: white;
+    }
+  
+    .sidenav ul li .menu-text {
+      display: inline; /* Show text in mobile view */
+    }
+  
+    .search-container {
+      /* margin-top: 1em; */
+      width: 100%;
+    }
+  
+    .search-bar {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      font-size: .8em; /* Further reduce font size on very small screens */
+    }
+  
+    .top-page img {
+      height: 300px;
+    }
+  
+    .top-content h1 {
+      font-size: 2em;
+    }
+  
+    .top-content p {
+      font-size: 1.2em;
+    }
+  
+    .top-content .btn {
+      font-size: 1em;
+    }
+  
+    .view-all-btn {
+      width: 120px;
+    }
+  }
+  

@@ -6,7 +6,7 @@ import { findRelatedProducts } from '../Utils/RelatedProducts';
 import CheckoutForm from './SemiComponents/CheckoutForm';
 import Footer from '../Components/SemiComponents/Footer';
 import Navbar from './SemiComponents/Navbar';
-import './Styles/SelectedProduct.css'; // Import the CSS for this component
+import './Styles/SelectedProduct.css';
 
 function SelectedProduct() {
   const location = useLocation();
@@ -33,7 +33,6 @@ function SelectedProduct() {
   return (
     <div className="selected-product-container">
         <Navbar />
-      {/* Selected Product Details */}
       {selectedProduct && (
         <div className="product-details">
           <div className="product-image">
@@ -45,7 +44,7 @@ function SelectedProduct() {
               <p className="product-description">{selectedProduct.description}</p>
               <p className="product-price">{formatPrice(selectedProduct.price)}</p>
               {/* Checkout form to purchase the selected product */}
-              <CheckoutForm props={selectedProduct} />
+              <CheckoutForm item={selectedProduct} />
             </div>
           </div>
         </div>

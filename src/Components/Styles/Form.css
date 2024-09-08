@@ -1,98 +1,203 @@
-/* Overall Form Styling */
+/* General form styling */
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 2em;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2em auto;
+    width: auto;
     max-width: 500px;
-    gap: 1.5em;
+    margin: 1em;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
-/* Form Header */
+/* Header styling */
 form h3 {
-    color: #333;
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 1em;
     text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
 }
 
-/* Input Group Styling */
+/* Form input container */
 form .form-inputs {
     display: flex;
     flex-direction: column;
-    gap: 1em;
-    width: 100%;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
+/* Input group styling */
 form .input-group {
     display: flex;
     align-items: center;
-    width: 100%;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    height: 40px; /* Matches the input field height */
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+    height: 3em;
 }
 
-/* Icon Styling */
+/* Icon styling */
 form .input-icon {
-    padding: 0.5em;
-    background-color: #f0f0f0;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    /* background-color: white; */
+    padding: .5em;
+    padding-right: .75em;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     border-right: 1px solid #ddd;
-    height: 100%; /* Ensures the icon height matches the input group */
-    width: 20px; /* Set a consistent width for the icons */
+}
+
+/* Line separator between icon and input field
+form .input-group::before {
+    content: '';
+    position: absolute;
+    left: 25px;
+    height: 20px;
+    width: 1px;
+    background-color: #ddd;
+    top: 50%;
+    transform: translateY(-50%);
+} */
+
+/* Input field styling */
+form input[type='text'],
+form input[type='email'],
+form input[type='number'],
+form textarea {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    font-size: 14px;
+    padding: 8px;
+}
+
+/* Textarea styling */
+form textarea {
+    height: 80px;
+    resize: none;
+}
+
+/* Focused input styling */
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #ff8c00; /* Orange color for focused input */
+}
+
+/* Order summary styling */
+form .order-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+/* Order summary header styling */
+form .order-summary h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Order item styling */
+form .order-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+/* Order item label styling */
+form .order-item label {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+/* Quantity field styling */
+form #quantity {
+    width: 60px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+/* Quantity buttons container */
+form .quantity-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+/* Quantity button styling */
+form .quantity-button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
     justify-content: center;
-}
-
-/* Input Fields Styling */
-form .input-group input {
-    flex-grow: 1;
-    padding: 0.5em;
-    border: none;
-    outline: none;
-    font-size: 1em;
-    color: #333;
-    height: 100%; /* Ensures the input field height matches the input group */
-}
-
-/* Input Focus Effect */
-form .input-group input:focus {
-    box-shadow: 0 0 5px rgba(255, 68, 0, 0.5);
-}
-
-/* Button Styling */
-form button {
-    width: 100%;
-    background-color: #ff4400;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75em 1em;
+    align-items: center;
+    border: 1px solid #ff8c00;
+    background-color: #f0f0f0;
+    margin: 0 5px;
     cursor: pointer;
-    font-size: 1.1em;
-    font-family: 'Arial', sans-serif;
-    box-shadow: 0 4px 8px rgba(255, 68, 0, 0.3);
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.2s;
 }
 
-/* Button Hover Effect */
-form button:hover {
-    background-color: #e63900;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(255, 68, 0, 0.3);
+/* Quantity button hover styling */
+form .quantity-button:hover {
+    background-color: #ff8c00;
+    color: white;
+    border-color: #e67300;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    form {
-        padding: 1.5em;
-    }
+/* Total field styling */
+form .total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+/* Note field styling */
+form .note-field {
+    margin: 1em .5em;
+}
+
+/* Note field label styling */
+form .note-field label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Note field textarea styling */
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Submit button styling */
+form button[type='submit'] {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff8c00;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+/* Submit button hover styling */
+form button[type='submit']:hover {
+    background-color: #e67300;
 }

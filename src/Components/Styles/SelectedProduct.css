@@ -29,7 +29,7 @@
   
   .product-info-container {
     flex: 1;
-    max-height: 80vh;
+    min-height: 80vh;
     overflow-y: auto;
     padding-right: 1em;
   }
