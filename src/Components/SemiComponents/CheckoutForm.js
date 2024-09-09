@@ -31,7 +31,7 @@ function CheckoutForm({ item }) {
         try {
             const postData = {
                 ...formData,
-                item: item.name,
+                item: item.title,
                 price: item.price,
                 amount: calculateTotal(),
             };
@@ -41,7 +41,7 @@ function CheckoutForm({ item }) {
             const response = await createRecord('orders', postData);
             console.log("Order response: ", response);
     
-            if (response.message === 'Data successfully written') {
+            if (response.status === 201) {
                 toast.success('Order placed successfully!');
                 setFormData({
                     name: '',
