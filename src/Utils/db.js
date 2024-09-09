@@ -4,7 +4,7 @@ const request = async (method, endpoint, body = null) => {
   const options = {
     method,
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "text/plain;charset=utf-8",
     },
     redirect: "follow",
   };
