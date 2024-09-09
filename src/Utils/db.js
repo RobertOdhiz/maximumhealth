@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://script.google.com/macros/s/AKfycbzj4GdlOYKzVmfLeyEVhVcLCJwmCVzm3qSG8FEvHYiz4qtl52ehRyhxCObEgqRioa-KsA/exec';
+const BASE_URL = 'https://script.google.com/macros/s/AKfycbxotnAcw4IsOudO3ZnroOs_mJigvAM4Xu9f3Zq9kyyTpsZQRlJt-p0kAf96vfsQgi7QmQ/exec?sheet=orders';
 
 const request = async (method, endpoint, body = null) => {
     const options = {
@@ -31,7 +31,7 @@ const request = async (method, endpoint, body = null) => {
           'Content-Type': 'application/json',
         },
       });
-      return response.data;
+      return response;
     } catch (error) {
       console.error('Error creating record:', error);
       throw error;

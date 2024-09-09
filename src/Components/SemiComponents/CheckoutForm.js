@@ -41,7 +41,7 @@ function CheckoutForm({ item }) {
             const response = await createRecord('orders', postData);
             console.log("Order response: ", response);
     
-            if (response.status === 201) {
+            if (response) {
                 toast.success('Order placed successfully!');
                 setFormData({
                     name: '',
