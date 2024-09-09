@@ -22,31 +22,27 @@ function CheckoutForm({ item }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Ensure form validation
+    
         if (!formData.name || !formData.email || !formData.county || !formData.location || !formData.phone) {
             toast.error('Please fill in all required fields.');
             return;
         }
-
+    
         try {
-            // Construct the data object for the API
             const postData = {
                 ...formData,
                 item: item.name,
                 price: item.price,
                 amount: calculateTotal(),
             };
-
+    
             console.log("Order data: ", postData);
-
-            // Send POST request to place the order
-            const response = await createRecord('orders', postData); // Replace 'Sheet2' with your actual sheet name
+    
+            const response = await createRecord('orders', postData);
             console.log("Order response: ", response);
-
+    
             if (response.message === 'Data successfully written') {
                 toast.success('Order placed successfully!');
-                // Optionally, clear form data or redirect user
                 setFormData({
                     name: '',
                     email: '',
@@ -64,7 +60,7 @@ function CheckoutForm({ item }) {
             console.error('Error placing order:', error);
             toast.error('An error occurred while placing your order. Please try again.');
         }
-    };
+    };    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -77,12 +73,12 @@ function CheckoutForm({ item }) {
     const handleQuantityChange = (increment) => {
         setFormData((prevValues) => ({
             ...prevValues,
-            quantity: Math.max(1, prevValues.quantity + increment), // Ensure quantity is at least 1
+            quantity: Math.max(1, prevValues.quantity + increment),
         }));
     };
 
     const calculateTotal = () => {
-        return (formData.quantity * Number(item.price)).toFixed(2); // Ensure price is a number and format to 2 decimal places
+        return (formData.quantity * Number(item.price)).toFixed(2);
     };
 
     return (

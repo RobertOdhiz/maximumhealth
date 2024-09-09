@@ -1,43 +1,52 @@
-// apiService.js
-const BASE_URL = "https://script.google.com/macros/s/AKfycbzj4GdlOYKzVmfLeyEVhVcLCJwmCVzm3qSG8FEvHYiz4qtl52ehRyhxCObEgqRioa-KsA/exec"
+import axios from 'axios';
 
-// Utility function to handle HTTP requests
+const BASE_URL = 'https://script.google.com/macros/s/AKfycbzj4GdlOYKzVmfLeyEVhVcLCJwmCVzm3qSG8FEvHYiz4qtl52ehRyhxCObEgqRioa-KsA/exec';
+
 const request = async (method, endpoint, body = null) => {
-  const options = {
-    redirect: "follow",
-    method,
-    headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-    },
+    const options = {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    if (body) {
+      options.body = JSON.stringify(body);
+    }
+    const response = await fetch(`${BASE_URL}${endpoint}`, options);
+    const data = await response.json();
+    return data;
   };
-  if (body) {
-    options.body = JSON.stringify(body);
-  }
-  const response = await fetch(`${BASE_URL}${endpoint}`, options);
-  const data = await response.json();
-  return data;
-};
-
-// Function to get data from a sheet
-export const getData = async (sheetName) => {
-  const endpoint = `?sheet=${sheetName}`;
-  return await request('GET', endpoint);
-};
-
-// Function to create a new record
-export const createRecord = async (sheetName, data) => {
-  const endpoint = `?sheet=${sheetName}`;
-  return await request('POST', endpoint, data);
-};
-
-// Function to update an existing record
-export const updateRecord = async (sheetName, data) => {
-  const endpoint = `?sheet=${sheetName}`;
-  return await request('PUT', endpoint, data);
-};
-
-// Function to delete a record
-export const deleteRecord = async (sheetName, id) => {
-  const endpoint = `?sheet=${sheetName}&id=${id}`;
-  return await request('DELETE', endpoint);
-};
+  
+  // Function to get data from a sheet
+  export const getData = async (sheetName) => {
+    const endpoint = `?sheet=${sheetName}`;
+    return await request('GET', endpoint);
+  };
+  
+  // Function to create a new record
+  export const createRecord = async (sheetName, data) => {
+    try {
+      const response = await axios.post(`${BASE_URL}?sheet=${sheetName}`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error creating record:', error);
+      throw error;
+    }
+  };
+  
+  // Function to update an existing record
+  export const updateRecord = async (sheetName, data) => {
+    const endpoint = `?sheet=${sheetName}`;
+    return await request('PUT', endpoint, data);
+  };
+  
+  // Function to delete a record
+  export const deleteRecord = async (sheetName, id) => {
+    const endpoint = `?sheet=${sheetName}&id=${id}`;
+    return await request('DELETE', endpoint);
+  };
+  
