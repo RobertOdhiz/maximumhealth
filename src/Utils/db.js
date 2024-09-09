@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://script.google.com/macros/s/AKfycbxotnAcw4IsOudO3ZnroOs_mJigvAM4Xu9f3Zq9kyyTpsZQRlJt-p0kAf96vfsQgi7QmQ/exec?sheet=orders';
+const BASE_URL = 'https://script.google.com/macros/s/AKfycbxotnAcw4IsOudO3ZnroOs_mJigvAM4Xu9f3Zq9kyyTpsZQRlJt-p0kAf96vfsQgi7QmQ/exec';
 
 const request = async (method, endpoint, body = null) => {
     const options = {
