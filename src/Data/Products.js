@@ -42,7 +42,7 @@ export const ProductsData = [
         "image": require('./../assets/matchatea.webp')
     },
     {
-        "id": 1,
+        "id": 7,
         "title":  "Tummy Trimmer",
         "price": 900,
         "description": "Tummy Trimmer",
