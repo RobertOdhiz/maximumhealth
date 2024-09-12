@@ -1,62 +1,72 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Styles/Products.css';
-import { ProductsData } from '../Data/Products'; // Your hardcoded products
 import Card from './SemiComponents/Card';
 import Footer from './SemiComponents/Footer';
 import Navbar from './SemiComponents/Navbar';
 import { getData } from '../Utils/db'; // Utility function to fetch data from Google Sheets
+import Loader from './SemiComponents/Loader'; // Import the Loader component
 
 function Products() {
   const navigate = useNavigate();
-  const [allProducts, setAllProducts] = useState([]); // State to hold all products
+  const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // State to manage loading
+  const [imageLoaded, setImageLoaded] = useState(false); // State to manage image loading
 
-  // Function to handle navigation to the product details page
   const selectProductAndNavigate = (product) => {
     navigate(`/products/${product.title}${product.id}`, { state: { selectedProduct: product } });
   };
 
-  // Fetch data from Google Sheets and merge with hardcoded products
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataFromSheets = await getDataFromSheets(); // Fetch data from Google Sheets
-        const combinedProducts = [...ProductsData, ...dataFromSheets]; // Merge hardcoded products with fetched data
-        setAllProducts(combinedProducts); // Set the merged products in state
+        const dataFromSheets = await getDataFromSheets();
+        setAllProducts(dataFromSheets);
+        setLoading(false); // Data has been fetched
       } catch (error) {
-        console.error('Error fetching data:', error); // Log error to console for debugging
+        console.error('Error fetching data:', error);
+        setLoading(false); // Even if there's an error, stop loading
       }
     };
 
     fetchData();
   }, []);
 
-  // Fetch data from Google Sheets using the utility function
   const getDataFromSheets = async () => {
     try {
-      const data = await getData('products'); // Fetch products from Google Sheets
-      return data || []; // Return the data or an empty array if no data
+      const data = await getData('products');
+      return data || [];
     } catch (error) {
-      console.error('Error retrieving data from Google Sheets:', error); // Log error to console for debugging
-      return []; // Return an empty array if an error occurs
+      console.error('Error retrieving data from Google Sheets:', error);
+      return [];
     }
+  };
+
+  // Handle image load event
+  const handleImageLoad = () => {
+    setImageLoaded(true);
   };
 
   return (
     <div>
       <Navbar />
-      <div className='products'>
-        {allProducts.map((item, key) => (
-          <Card
-            key={key}
-            title={item.title}
-            description={item.description}
-            price={item.price}
-            image={item.image || item.imageURL}
-            onClick={() => selectProductAndNavigate(item)}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <Loader /> // Display loader while data is being fetched
+      ) : (
+        <div className='products'>
+          {allProducts.map((item, key) => (
+            <Card
+              key={key}
+              title={item.title}
+              price={item.price}
+              image={item.imageURL ? item.imageURL : 'https://drive.google.com/uc?export=view&id=1tO4y1BjnAyxyG3F417YtizX1c1fm64ub'}
+              onClick={() => selectProductAndNavigate(item)}
+              // Add onLoad event for image
+              onImageLoad={handleImageLoad}
+            />
+          ))}
+        </div>
+      )}
       <Footer />
     </div>
   );

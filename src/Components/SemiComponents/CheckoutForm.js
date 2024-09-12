@@ -23,7 +23,7 @@ function CheckoutForm({ item }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        if (!formData.name || !formData.email || !formData.county || !formData.location || !formData.phone) {
+        if (!formData.name || !formData.county || !formData.location || !formData.phone) {
             toast.error('Please fill in all required fields.');
             return;
         }
@@ -43,6 +43,7 @@ function CheckoutForm({ item }) {
     
             if (response) {
                 toast.success('Order placed successfully!');
+                toast.info(`Order for ${postData.item} completed. You will receive a call from us within 24hours. Thank you.`);
                 setFormData({
                     name: '',
                     email: '',
@@ -78,8 +79,26 @@ function CheckoutForm({ item }) {
     };
 
     const calculateTotal = () => {
-        return (formData.quantity * Number(item.price)).toFixed(2);
+        const price = Number(item.price);
+        const quantity = formData.quantity;
+    
+        let total = 0;
+    
+        if (quantity === 1) {
+            total = price;
+        } else if (quantity === 2) {
+            total = price + (0.6 * price);
+        } else if (quantity === 3) {
+            const priceForTwo = price + (0.6 * price);
+            total = priceForTwo + (0.45 * price);
+        } else if (quantity >= 4) {
+            const priceForThree = price + (0.6 * price) + (0.45 * price);
+            total = priceForThree + (quantity - 3) * (0.35 * price); 
+        }
+    
+        return total.toFixed(2);
     };
+    
 
     return (
         <form onSubmit={handleSubmit}>
@@ -105,7 +124,7 @@ function CheckoutForm({ item }) {
                         value={formData.phone}
                     />
                 </div>
-                <div className="input-group">
+                {/* <div className="input-group">
                     <img src={emailIcon} alt="Email" className="input-icon" />
                     <input
                         name="email"
@@ -114,7 +133,7 @@ function CheckoutForm({ item }) {
                         onChange={handleInputChange}
                         value={formData.email}
                     />
-                </div>
+                </div> */}
                 <div className="input-group">
                     <img src={countyIcon} alt="County" className="input-icon" />
                     <input

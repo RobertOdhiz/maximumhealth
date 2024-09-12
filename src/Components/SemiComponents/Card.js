@@ -1,63 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState } from 'react';
 import './../Styles/Card.css';
 
-// Loader component
-const Loader = () => (
-  <div className="loader"></div>
-);
-
 function Card(props) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [loading, setLoading] = useState(true); // State for loading
+  const [loadingImage, setLoadingImage] = useState(true);
 
-  // Utility function to parse image URLs from a string into an array
-  function parseImageURLs(imageString) {
-    if (!imageString) return []; // If imageString is empty or undefined, return an empty array
-    return imageString.split(',').map(url => url.trim());
-  }
-
-  // Convert the image URL string to an array
-  const images = parseImageURLs(props.image);
-
-  useEffect(() => {
-    setLoading(true); // Set loading to true when the component mounts or image changes
-  }, [currentImageIndex, images]);
-
-  // Function to handle image load
-  const handleImageLoad = () => {
-    setLoading(false); // Stop loading when the image is fully loaded
+  const getHrefFromSrc = (src) => {
+    const matches = src.match(/https:\/\/i\.ibb\.co\/([a-zA-Z0-9]+)\/.*/);
+    return matches ? `https://ibb.co/${matches[1]}` : '#'; // Return the modified URL or a fallback
   };
 
-  // Function to handle errors while loading image
-  const handleImageError = () => {
-    setLoading(false); // Stop loading on error
-  };
-
-  // Function to go to the next image
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  // Function to go to the previous image
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+  const href = getHrefFromSrc(props.image);
 
   return (
     <div className='card'>
       <div className='card-image-container'>
+        {loadingImage && <div className='image-placeholder'>Loading...</div>}
+        <a href={href}>
           <img
-            src={images[currentImageIndex]}
+            src={props.image}
             alt={props.title}
-            className='card-image'
-            onLoad={handleImageLoad}
-            onError={handleImageError}
+            border="0"
+            onLoad={() => setLoadingImage(false)}
           />
+        </a>
       </div>
       <div className='card-text' onClick={props.onClick}>
         <h5>{props.title}</h5>

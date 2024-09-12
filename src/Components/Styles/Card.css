@@ -55,11 +55,11 @@
 
 /* Card Description */
 .card-text p {
-  color: #666;
-  font-size: 1em;
+  color: #ff4400;
+  font-size: 1.5em;
   margin: 8px 0;
   font-family: 'Arial', sans-serif;
-  font-style: italic; /* Make the description italic */
+  /* font-style: italic; Make the description italic */
 }
 
 /* Card Image Container */
@@ -104,11 +104,11 @@
 /* Card Price */
 .card-price {
   color: #ff4400;
-  font-size: 1.2em;
+  font-size: 2em;
   font-weight: bold;
   margin-top: 5px;
   font-family: 'Arial', sans-serif;
-  font-style: italic; /* Make the price italic */
+  /* font-style: italic; Make the price italic */
 }
 
 /* Responsive Design */
@@ -123,9 +123,19 @@
   }
 }
 
-/* .card-image-container {
+ .card-image {
   position: relative;
-  width: 100%;
-  height: auto;
 }
- */
+
+.image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  color: #666;
+}

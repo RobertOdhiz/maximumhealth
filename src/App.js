@@ -5,6 +5,7 @@ import Products from "./Components/Products";
 import SelectedProduct from "./Components/SelectedProduct";
 import NotFound from "./Components/NotFound"; // Import your custom 404 component
 import CheckoutForm from "./Components/SemiComponents/CheckoutForm";
+import Cart from "./Components/SemiComponents/Cart";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/catalogue" element={<Products />} />
         <Route path="/checkout" element={<CheckoutForm />} />
         <Route path="/products/:id" element={<SelectedProduct />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -22,9 +22,9 @@ function Navbar() {
       <div className={`sidenav ${isMenuOpen ? 'open' : ''}`}>
         <ul>
           <li onClick={() => navigate('/catalogue')}>Catalogue</li>
-          <li className='icon' onClick={() => navigate('/wishlist')}><FaHeart /> <span className='menu-text'>Wishlist</span></li>
+          {/* <li className='icon' onClick={() => navigate('/profile')}>Men's Watches</li>
+          <li className='icon' onClick={() => navigate('/wishlist')}>Women's Watches</li> */}
           <li className='icon' onClick={() => navigate('/cart')}><FaShoppingCart /> <span className='menu-text'>Cart</span></li>
-          <li className='icon' onClick={() => navigate('/profile')}><FaUser /> <span className='menu-text'>Profile</span></li>
         </ul>
       </div>
       <div className='search-container'>
