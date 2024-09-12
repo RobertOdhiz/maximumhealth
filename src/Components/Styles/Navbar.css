@@ -91,6 +91,29 @@ nav {
     /* background-color: #e64a19; */
     transform: scale(1.1);
   }
+
+  .search-results {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .search-results li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .search-results li:hover {
+    background-color: #f0f0f0;
+  }
+  
   
   /* Responsive Styles */
   @media (max-width: 768px) {

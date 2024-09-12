@@ -30,7 +30,7 @@ function SelectedProduct() {
 
   useEffect(() => {
     if (selectedProduct) {
-      document.title = `Buy ${selectedProduct.title} | Maximum Health`;
+      document.title = `Order ${selectedProduct.title} | Maximum Health`;
     }
   }, [selectedProduct]);
 
@@ -52,19 +52,19 @@ function SelectedProduct() {
   };
 
   // Function to add the product to the cart
-  const addToCart = () => {
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    const productInCart = storedCart.find(item => item.uuid === selectedProduct.uuid);
+  // const addToCart = () => {
+  //   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+  //   const productInCart = storedCart.find(item => item.uuid === selectedProduct.uuid);
 
-    if (productInCart) {
-      productInCart.quantity += 1;
-    } else {
-      storedCart.push({ ...selectedProduct, quantity: 1 });
-    }
+  //   if (productInCart) {
+  //     productInCart.quantity += 1;
+  //   } else {
+  //     storedCart.push({ ...selectedProduct, quantity: 1 });
+  //   }
 
-    localStorage.setItem('cart', JSON.stringify(storedCart));
-    toast.success(`${selectedProduct.title} successfully added to cart.`);
-  };
+  //   localStorage.setItem('cart', JSON.stringify(storedCart));
+  //   toast.success(`${selectedProduct.title} successfully added to cart.`);
+  // };
 
   return (
     <div className="selected-product-container">
@@ -81,7 +81,7 @@ function SelectedProduct() {
             <div className="product-info">
               <h1>{selectedProduct.title}</h1>
               <p className="product-price">{formatPrice(selectedProduct.price)}</p>
-              <button onClick={addToCart} className="btn primary-btn">Add to Cart</button>
+              {/* <button onClick={addToCart} className="btn primary-btn">Add to Cart</button> */}
               <CheckoutForm item={selectedProduct} />
             </div>
           </div>

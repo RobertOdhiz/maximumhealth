@@ -46,7 +46,6 @@ function Cart() {
   return (
     <div className="cart-container">
         <Navbar />
-      <h1>Your Cart</h1>
       <div className="cart-items">
         {cartItems.length > 0 ? (
           cartItems.map(item => (
@@ -69,10 +68,10 @@ function Cart() {
           <p>Your cart is empty. We are still working on It.</p>
         )}
       </div>
-      <div className="cart-summary">
+      {/* <div className="cart-summary">
         <h2>Cart Total: {formatPrice(calculateTotal())}</h2>
-        {/* <button onClick={() => navigate('/checkout')} className="checkout-button">Proceed to Checkout</button> */}
-      </div>
+        <button onClick={() => navigate('/checkout')} className="checkout-button">Proceed to Checkout</button>
+      </div> */}
     </div>
   );
 }

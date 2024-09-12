@@ -11,7 +11,6 @@ import { createRecord } from '../../Utils/db';
 function CheckoutForm({ item }) {
     const [formData, setFormData] = useState({
         name: '',
-        email: '',
         county: '',
         location: '',
         phone: '',
@@ -46,7 +45,6 @@ function CheckoutForm({ item }) {
                 toast.info(`Order for ${postData.item} completed. You will receive a call from us within 24hours. Thank you.`);
                 setFormData({
                     name: '',
-                    email: '',
                     county: '',
                     location: '',
                     phone: '',
@@ -81,23 +79,29 @@ function CheckoutForm({ item }) {
     const calculateTotal = () => {
         const price = Number(item.price);
         const quantity = formData.quantity;
-    
         let total = 0;
-    
-        if (quantity === 1) {
+      
+        if (item.discount === 1) {
+          // Apply discount logic
+          if (quantity === 1) {
             total = price;
-        } else if (quantity === 2) {
-            total = price + (0.6 * price);
-        } else if (quantity === 3) {
-            const priceForTwo = price + (0.6 * price);
-            total = priceForTwo + (0.45 * price);
-        } else if (quantity >= 4) {
-            const priceForThree = price + (0.6 * price) + (0.45 * price);
-            total = priceForThree + (quantity - 3) * (0.35 * price); 
+          } else if (quantity === 2) {
+            total = price + 0.6 * price;
+          } else if (quantity === 3) {
+            const priceForTwo = price + 0.6 * price;
+            total = priceForTwo + 0.45 * price;
+          } else if (quantity >= 4) {
+            const priceForThree = price + 0.6 * price + 0.45 * price;
+            total = priceForThree + (quantity - 3) * (0.35 * price);
+          }
+        } else {
+          // No discount; calculate regular price
+          total = price * quantity;
         }
-    
+      
         return total.toFixed(2);
-    };
+      };
+      
     
 
     return (

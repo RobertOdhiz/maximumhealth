@@ -55,7 +55,7 @@ function HomePage() {
           <img src={TopPage2} alt='' />
         </div>
         <div className='top-content'>
-          <h1>Look Bossy</h1>
+          <h1>Maximum Health</h1>
           <p>Your one-stop online shop for Healthy Products with Free Delivery Countrywide</p>
           <button className='btn' onClick={() => navigate('/catalogue')}>
             <span>Shop Now</span>

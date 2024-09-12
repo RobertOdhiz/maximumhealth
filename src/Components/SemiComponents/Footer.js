@@ -31,7 +31,7 @@ export default function Footer() {
         </form>
       </div>
       <hr className="footer-line" />
-      <p>2024, Look Bossy. All Rights Reserved.</p>
+      <p>2024, Maximum Health. All Rights Reserved.</p>
     </footer>
   );
 }

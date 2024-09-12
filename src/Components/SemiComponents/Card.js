@@ -26,7 +26,7 @@ function Card(props) {
       </div>
       <div className='card-text' onClick={props.onClick}>
         <h5>{props.title}</h5>
-        <p>{props.description}</p>
+        {/* <p>{props.description}</p> */}
         <p className='card-price'>Ksh {props.price}</p>
       </div>
     </div>

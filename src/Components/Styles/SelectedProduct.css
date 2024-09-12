@@ -118,9 +118,18 @@
   box-sizing: border-box;
 }
 
+/* Media Queries */
 @media (max-width: 768px) {
   .product-details {
     flex-direction: column;
+  }
+
+  .product-info-container {
+    order: 2; /* Ensure the info container is below the description on mobile */
+  }
+
+  .product-info {
+    order: 1; /* Ensure the info section appears above the description */
   }
 
   .product-info h1 {

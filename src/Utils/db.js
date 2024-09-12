@@ -1,4 +1,4 @@
-const BASE_URL = 'https://script.google.com/macros/s/AKfycbxv8Bladn_zwdo_Sp4T31Awu89osRUtFMtDYSY34r4ew13YV0o-YjzYU5CQohGWWUZkdg/exec';
+const BASE_URL = 'https://script.google.com/macros/s/AKfycbxImVdS0j7XsY9cnynQDR3dIz3fLdEq7wfGjk5Z2zbb2eSnDUwO00IEO97OUxcc6MuXRw/exec';
 
 const request = async (method, endpoint, body = null) => {
   const options = {
@@ -38,4 +38,11 @@ export const updateRecord = async (sheetName, data) => {
 export const deleteRecord = async (sheetName, id) => {
   const endpoint = `?sheet=${sheetName}&uuid=${id}`;
   return await request('DELETE', endpoint);
+};
+
+
+// Function to search for products by text
+export const searchProducts = async (searchText) => {
+  const endpoint = `?search=${encodeURIComponent(searchText)}`; 
+  return await request('GET', endpoint); 
 };

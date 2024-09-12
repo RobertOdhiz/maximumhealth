@@ -1,19 +1,19 @@
 {
-  "short_name": "Look Bossy",
-  "name": "Look Bossy - Your One stop online shop for all the products you need with free delivery countrywide",
+  "short_name": "Maximum Health",
+  "name": "Maximum Health",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "maxH.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "MaxH.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "MaxH.svg",
       "type": "image/png",
       "sizes": "512x512"
     }
