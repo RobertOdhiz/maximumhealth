@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Card from './SemiComponents/Card';
 import { ProductsData } from '../Data/Products';
@@ -7,6 +7,7 @@ import CheckoutForm from './SemiComponents/CheckoutForm';
 import Footer from '../Components/SemiComponents/Footer';
 import Navbar from './SemiComponents/Navbar';
 import './Styles/SelectedProduct.css';
+import { toast } from 'react-toastify';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 
@@ -27,9 +28,11 @@ function SelectedProduct() {
 
   const { selectedProduct, relatedProducts } = location.state || {};
 
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   useEffect(() => {
     if (selectedProduct) {
-      document.title = `Order ${selectedProduct.title} | Maximum Health`;
+      document.title = `Order ${selectedProduct.title} | Furaha Shop`;
     }
   }, [selectedProduct]);
 
@@ -45,25 +48,13 @@ function SelectedProduct() {
 
   // Function to generate the href dynamically from the src
   const getHrefFromSrc = (src) => {
-    // Extract the ID part from the src (assuming the src format is "https://i.ibb.co/<id>/<image-name>")
     const matches = src.match(/https:\/\/i\.ibb\.co\/([a-zA-Z0-9]+)\/.*/);
-    return matches ? `https://ibb.co/${matches[1]}` : '#'; // Return the modified URL or a fallback
+    return matches ? `https://ibb.co/${matches[1]}` : '#';
   };
 
-  // Function to add the product to the cart
-  // const addToCart = () => {
-  //   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-  //   const productInCart = storedCart.find(item => item.uuid === selectedProduct.uuid);
-
-  //   if (productInCart) {
-  //     productInCart.quantity += 1;
-  //   } else {
-  //     storedCart.push({ ...selectedProduct, quantity: 1 });
-  //   }
-
-  //   localStorage.setItem('cart', JSON.stringify(storedCart));
-  //   toast.success(`${selectedProduct.title} successfully added to cart.`);
-  // };
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
 
   return (
     <div className="selected-product-container">
@@ -74,14 +65,27 @@ function SelectedProduct() {
             <a href={getHrefFromSrc(selectedProduct.imageURL)}>
               <img src={selectedProduct.imageURL} alt={selectedProduct.title} />
             </a>
-            <p className="product-description" dangerouslySetInnerHTML={formatDescription(selectedProduct.description)} />
           </div>
           <div className="product-info-container">
             <div className="product-info">
               <h1>{selectedProduct.title}</h1>
               <p className="product-price">{formatPrice(selectedProduct.price)}</p>
-              {/* <button onClick={addToCart} className="btn primary-btn">Add to Cart</button> */}
+
+              {/* Mobile View: Show CheckoutForm first */}
               <CheckoutForm item={selectedProduct} />
+
+              <div className="product-description">
+                <p
+                  dangerouslySetInnerHTML={formatDescription(
+                    showFullDescription ? selectedProduct.description : selectedProduct.description.slice(0, 200) + '...'
+                  )}
+                />
+                {selectedProduct.description.length > 200 && (
+                  <button onClick={toggleDescription} className="btn read-more-btn">
+                    {showFullDescription ? 'Read Less' : 'Read More'}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

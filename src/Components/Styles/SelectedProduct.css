@@ -5,17 +5,18 @@
 
 .product-details {
   display: flex;
-  gap: 1.5em; /* Gap between image and content */
+  gap: 1.5em;
   align-items: flex-start;
   margin-bottom: 1.5em;
-  overflow: auto;
   padding: 1.5em;
+  overflow: hidden;
+  flex-direction: row;
 }
 
 .product-image {
   flex: 0 0 auto;
-  width: 35%; /* Width for the image */
-  max-height: 400px; /* Max height for the image */
+  width: 35%;
+  max-height: 400px;
 }
 
 .product-image img {
@@ -28,7 +29,6 @@
 .product-info-container {
   flex: 1;
   min-height: 80vh;
-  overflow-y: auto;
   padding-right: 1em;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
 .product-info {
   display: flex;
   flex-direction: column;
-  gap: 0.5em; /* Gap between elements */
+  gap: 0.5em;
 }
 
 .product-info h1 {
@@ -58,44 +58,17 @@
   margin-top: 0.2em;
 }
 
-.product-actions {
-  display: flex;
-  gap: 0.8em;
-  margin-top: 0.8em;
-}
-
-.product-actions .btn {
-  padding: 0.7em 1.2em;
+.read-more-btn {
+  background-color: transparent;
   border: none;
-  border-radius: 4px;
-  font-size: 0.9em;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.primary-btn {
-  background-color: #f57c00;
-  color: white;
-  width: auto;
-}
-
-.primary-btn:hover {
-  background-color: #df7104;
-}
-
-.secondary-btn {
-  background-color: white;
   color: #f57c00;
-  border: 1px solid #f57c00;
-}
-
-.secondary-btn:hover {
-  background-color: #f57c00;
-  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  text-decoration: underline;
 }
 
 .related-products {
-  margin-top: 1.5em; /* Margin for related products */
+  margin-top: 1.5em;
 }
 
 .related-products h2 {
@@ -121,23 +94,40 @@
 /* Media Queries */
 @media (max-width: 768px) {
   .product-details {
-    flex-direction: column;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-image {
+    width: 80%;
   }
 
   .product-info-container {
-    order: 2; /* Ensure the info container is below the description on mobile */
-  }
-
-  .product-info {
-    order: 1; /* Ensure the info section appears above the description */
+    padding: 0;
+    width: 100%;
   }
 
   .product-info h1 {
     font-size: 1.8em;
   }
 
-  .product-description {
-    font-size: 0.9em; /* Maintain reduced size on smaller screens */
+  .products-list .card {
+    flex: 1 1 calc(50% - 1em); /* Display two cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-details {
+    padding: 1em;
+  }
+
+  .product-image {
+    width: 100%;
+  }
+
+  .product-info h1 {
+    font-size: 1.6em;
   }
 
   .product-price {
@@ -145,24 +135,6 @@
   }
 
   .products-list .card {
-    flex: 1 1 calc(50% - 1em);
-  }
-}
-
-@media (max-width: 480px) {
-  .product-info h1 {
-    font-size: 1.4em;
-  }
-
-  .product-description {
-    font-size: 0.8em; /* Further reduce font size on very small screens */
-  }
-
-  .product-price {
-    font-size: 1em;
-  }
-
-  .products-list .card {
-    flex: 1 1 100%;
+    flex: 1 1 100%; /* Display one card per row */
   }
 }
