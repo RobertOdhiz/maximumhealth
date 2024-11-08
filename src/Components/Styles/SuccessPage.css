@@ -1,0 +1,28 @@
+.success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    background-color: #FFF7E7;
+    color: #FF8C00;
+    padding: 20px;
+}
+
+.success-message {
+    font-size: 2rem;
+    margin-top: 20px;
+    color: #FF8C00;
+}
+
+.redirect-message {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.styled-link {
+    color: #FF8C00;
+    text-decoration: underline;
+    font-weight: bold;
+}

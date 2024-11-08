@@ -7,7 +7,6 @@ import CheckoutForm from './SemiComponents/CheckoutForm';
 import Footer from '../Components/SemiComponents/Footer';
 import Navbar from './SemiComponents/Navbar';
 import './Styles/SelectedProduct.css';
-import { toast } from 'react-toastify';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 

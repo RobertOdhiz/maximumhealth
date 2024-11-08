@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import '../Styles/Form.css';
 import userIcon from '../../assets/name-icon.svg';
-import emailIcon from '../../assets/email-icon.svg';
 import locationIcon from '../../assets/location-icon.svg';
 import countyIcon from '../../assets/county-icon.svg';
 import phoneIcon from '../../assets/phone-icon.svg';
 import { createRecord } from '../../Utils/db';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutForm({ item }) {
     const [formData, setFormData] = useState({
@@ -18,6 +18,8 @@ function CheckoutForm({ item }) {
         quantity: 1,
         note: '',
     });
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,7 +44,7 @@ function CheckoutForm({ item }) {
     
             if (response) {
                 toast.success('Order placed successfully!');
-                toast.info(`Order for ${postData.item} completed. You will receive a call from us within 24hours. Thank you.`);
+                toast.info(`Order for ${postData.item} completed. You will receive a call from us within 24 hours. Thank you.`);
                 setFormData({
                     name: '',
                     county: '',
@@ -52,6 +54,9 @@ function CheckoutForm({ item }) {
                     quantity: 1,
                     note: '',
                 });
+                
+                // Navigate to SuccessPage and pass the item data
+                navigate('/success', { state: { item: postData } });
             } else {
                 toast.error('Failed to place order. Please try again.');
             }
@@ -59,7 +64,7 @@ function CheckoutForm({ item }) {
             console.error('Error placing order:', error);
             toast.error('An error occurred while placing your order. Please try again.');
         }
-    };    
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -82,7 +87,6 @@ function CheckoutForm({ item }) {
         let total = 0;
       
         if (item.discount === 1) {
-          // Apply discount logic
           if (quantity === 1) {
             total = price;
           } else if (quantity === 2) {
@@ -95,14 +99,11 @@ function CheckoutForm({ item }) {
             total = priceForThree + (quantity - 3) * (0.35 * price);
           }
         } else {
-          // No discount; calculate regular price
           total = price * quantity;
         }
       
         return total.toFixed(2);
       };
-      
-    
 
     return (
         <form onSubmit={handleSubmit}>
