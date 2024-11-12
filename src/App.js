@@ -7,10 +7,12 @@ import NotFound from "./Components/NotFound"; // Import your custom 404 componen
 import CheckoutForm from "./Components/SemiComponents/CheckoutForm";
 import Cart from "./Components/SemiComponents/Cart";
 import SuccessPage from "./Components/SuccessPage";
+import MetaPixel from "./Utils/meta";
 
 function App() {
   return (
     <BrowserRouter>
+    <MetaPixel />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/catalogue" element={<Products />} />
