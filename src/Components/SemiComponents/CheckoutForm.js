@@ -43,8 +43,6 @@ function CheckoutForm({ item }) {
             console.log("Order response: ", response);
     
             if (response) {
-                toast.success('Order placed successfully!');
-                toast.info(`Order for ${postData.item} completed. You will receive a call from us within 24 hours. Thank you.`);
                 setFormData({
                     name: '',
                     county: '',

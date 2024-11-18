@@ -7,7 +7,6 @@ import CheckoutForm from './SemiComponents/CheckoutForm';
 import Footer from '../Components/SemiComponents/Footer';
 import Navbar from './SemiComponents/Navbar';
 import './Styles/SelectedProduct.css';
-import { toast } from 'react-toastify';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 
@@ -31,13 +30,15 @@ function SelectedProduct() {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   useEffect(() => {
-    if (selectedProduct) {
-      document.title = `Order ${selectedProduct.title} | Furaha Shop`;
+    if (!selectedProduct) {
+      navigate("/not-found");
+      return;
     }
+      document.title = `Order ${selectedProduct.title} | Furaha Shop`;
   }, [selectedProduct]);
 
   const formatPrice = (price) => {
-    return `Ksh ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`; // Format price with commas
+    return `Ksh ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   };
 
   const selectProductAndNavigate = (product) => {

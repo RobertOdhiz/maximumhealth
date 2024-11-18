@@ -3,12 +3,16 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Styles/SuccessPage.css";
 
 export default function SuccessPage() {
-    const [remainingSeconds, setRemainingSeconds] = useState(5);
+    const [remainingSeconds, setRemainingSeconds] = useState(10);
     const navigate = useNavigate();
     const location = useLocation();
     const item = location.state?.item;
 
     useEffect(() => {
+        if (!item) {
+            navigate("/not-found");
+            return;
+        }
         const countdown = setInterval(() => {
             setRemainingSeconds((prev) => {
                 if (prev === 1) {
@@ -19,7 +23,12 @@ export default function SuccessPage() {
             });
         }, 1000);
         return () => clearInterval(countdown);
-    }, [navigate]);
+    }, [navigate, item]);
+
+    if (!item) {
+        navigate("/not-found");
+        return;
+    }
 
     return (
         <div className="success-container">
@@ -30,7 +39,7 @@ export default function SuccessPage() {
                 style={{ width: "300px", height: "300px" }}
                 autoplay
             ></lottie-player>
-            <h1 className="success-message">Your purchase of {item?.title} was successful!</h1>
+            <h1 className="success-message">Your purchase of {item.item} was successful!</h1>
             <p className="redirect-message">
                 You will be redirected to the products page in {remainingSeconds} seconds
             </p>

@@ -14,7 +14,7 @@ function Products() {
   const [imageLoaded, setImageLoaded] = useState(false); // State to manage image loading
 
   const selectProductAndNavigate = (product) => {
-    navigate(`/products/${product.title}${product.id}`, { state: { selectedProduct: product } });
+    navigate(`/products/${product.title}${product.uuid}`, { state: { selectedProduct: product } });
   };
 
   useEffect(() => {
@@ -61,7 +61,6 @@ function Products() {
               price={item.price}
               image={item.imageURL ? item.imageURL : 'https://drive.google.com/uc?export=view&id=1tO4y1BjnAyxyG3F417YtizX1c1fm64ub'}
               onClick={() => selectProductAndNavigate(item)}
-              // Add onLoad event for image
               onImageLoad={handleImageLoad}
             />
           ))}
