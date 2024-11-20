@@ -16,7 +16,7 @@ function HomePage() {
     const related = findRelatedProducts(product, ProductsData);
 
     // Navigating to the product details page with the selected product and its related products
-    navigate(`/products/${product.title}${product.uuid}`, { state: { selectedProduct: product, relatedProducts: related } });
+    navigate(`/products/${product.title}?id=${product.uuid}`, { state: { selectedProduct: product, relatedProducts: related } });
   };
 
   useEffect(() => {

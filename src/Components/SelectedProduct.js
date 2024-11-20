@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getById } from '../Utils/db';
 import Card from './SemiComponents/Card';
-import { ProductsData } from '../Data/Products';
 import { findRelatedProducts } from '../Utils/RelatedProducts';
 import CheckoutForm from './SemiComponents/CheckoutForm';
 import Footer from '../Components/SemiComponents/Footer';
@@ -9,15 +9,13 @@ import Navbar from './SemiComponents/Navbar';
 import './Styles/SelectedProduct.css';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
+import Loader from './SemiComponents/Loader';
 
 // Function to format description using Markdown
 const formatDescription = (description) => {
-  // Convert Markdown to HTML
+  if (!description) return { __html: '' }; // Handle null/undefined description
   const rawMarkup = marked(description);
-
-  // Sanitize the HTML
   const sanitizedMarkup = DOMPurify.sanitize(rawMarkup);
-
   return { __html: sanitizedMarkup };
 };
 
@@ -25,29 +23,53 @@ function SelectedProduct() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { selectedProduct, relatedProducts } = location.state || {};
+  // Extract query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const uuid = queryParams.get('id'); // Extract `id` from query parameters
 
+  const { selectedProduct: stateProduct, relatedProducts: stateRelatedProducts } = location.state || {};
+  const [selectedProduct, setSelectedProduct] = useState(stateProduct || { title: '', description: '', price: 0, imageURL: '' });
+  const [relatedProducts, setRelatedProducts] = useState(stateRelatedProducts || []);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [error, setError] = useState(null); // Track errors
 
   useEffect(() => {
-    if (!selectedProduct) {
-      navigate("/not-found");
-      return;
+    // Fetch product if not passed via state
+    const fetchProduct = async () => {
+      try {
+        if (!uuid) throw new Error('Product ID is missing in the URL.');
+        const product = await getById('products', uuid);
+        if (!product) throw new Error('Product not found.');
+        setSelectedProduct(product);
+
+        // Fetch related products
+        const related = findRelatedProducts(product);
+        setRelatedProducts(related || []);
+        setError(null); // Clear any previous errors
+      } catch (err) {
+        console.error(err.message);
+        setError(err.message);
+        navigate('/not-found');
+      }
+    };
+
+    if (!stateProduct) {
+      fetchProduct();
+    } else {
+      document.title = `Order ${stateProduct.title} | Maximum Health`;
     }
-      document.title = `Order ${selectedProduct.title} | Furaha Shop`;
-  }, [selectedProduct]);
+  }, [stateProduct, uuid, navigate]);
 
   const formatPrice = (price) => {
     return `Ksh ${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   };
 
   const selectProductAndNavigate = (product) => {
-    navigate(`/products/${product.title}${product.uuid}`, {
-      state: { selectedProduct: product, relatedProducts: findRelatedProducts(product, ProductsData) },
+    navigate(`/products/${product.title}?id=${product.uuid}`, {
+      state: { selectedProduct: product, relatedProducts: findRelatedProducts(product) },
     });
   };
 
-  // Function to generate the href dynamically from the src
   const getHrefFromSrc = (src) => {
     const matches = src.match(/https:\/\/i\.ibb\.co\/([a-zA-Z0-9]+)\/.*/);
     return matches ? `https://ibb.co/${matches[1]}` : '#';
@@ -57,10 +79,21 @@ function SelectedProduct() {
     setShowFullDescription(!showFullDescription);
   };
 
+  if (error) {
+    return (
+      <div className="error-container">
+        <Navbar />
+        <h1>Error</h1>
+        <p>{error}</p>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="selected-product-container">
       <Navbar />
-      {selectedProduct && (
+      {selectedProduct && selectedProduct.title ? (
         <div className="product-details">
           <div className="product-image">
             <a href={getHrefFromSrc(selectedProduct.imageURL)}>
@@ -72,16 +105,17 @@ function SelectedProduct() {
               <h1>{selectedProduct.title}</h1>
               <p className="product-price">{formatPrice(selectedProduct.price)}</p>
 
-              {/* Mobile View: Show CheckoutForm first */}
               <CheckoutForm item={selectedProduct} />
 
               <div className="product-description">
                 <p
                   dangerouslySetInnerHTML={formatDescription(
-                    showFullDescription ? selectedProduct.description : selectedProduct.description.slice(0, 200) + '...'
+                    showFullDescription
+                      ? selectedProduct.description
+                      : selectedProduct.description.slice(0, 200) + '...'
                   )}
                 />
-                {selectedProduct.description.length > 200 && (
+                {selectedProduct.description && selectedProduct.description.length > 200 && (
                   <button onClick={toggleDescription} className="btn read-more-btn">
                     {showFullDescription ? 'Read Less' : 'Read More'}
                   </button>
@@ -90,13 +124,14 @@ function SelectedProduct() {
             </div>
           </div>
         </div>
+      ) : (
+        <Loader />
       )}
 
-      {/* List of Related Products */}
       <div className="related-products">
         <h2>Related Products</h2>
         <div className="products-list">
-          {relatedProducts && relatedProducts.length > 0 ? (
+          {relatedProducts?.length > 0 ? (
             relatedProducts.map((product, key) => (
               <Card
                 key={key}

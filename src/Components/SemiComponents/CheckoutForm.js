@@ -32,7 +32,7 @@ function CheckoutForm({ item }) {
         try {
             const postData = {
                 ...formData,
-                item: item.title,
+                item: item.uuid,
                 price: item.price,
                 amount: calculateTotal(),
             };
@@ -54,7 +54,7 @@ function CheckoutForm({ item }) {
                 });
                 
                 // Navigate to SuccessPage and pass the item data
-                navigate('/success', { state: { item: postData } });
+                navigate('/success', { state: { item: postData, itemName: item.title } });
             } else {
                 toast.error('Failed to place order. Please try again.');
             }

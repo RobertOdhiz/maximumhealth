@@ -1,48 +1,66 @@
-const BASE_URL = 'https://script.google.com/macros/s/AKfycbxImVdS0j7XsY9cnynQDR3dIz3fLdEq7wfGjk5Z2zbb2eSnDUwO00IEO97OUxcc6MuXRw/exec';
+import axios from 'axios';
+
+const BASE_URL = 'https://maxhealth-be.vercel.app/api';
 
 const request = async (method, endpoint, body = null) => {
-  const options = {
+  const config = {
     method,
+    url: `${BASE_URL}${endpoint}`,
     headers: {
-      "Content-Type": "text/plain;charset=utf-8",
+      "Content-Type": "application/json",
     },
-    redirect: "follow",
+    data: body || undefined,
   };
-  if (body) {
-    options.body = JSON.stringify(body);
-  }
-  const response = await fetch(`${BASE_URL}${endpoint}`, options);
-  const data = await response.json();
-  return data;
+  const response = await axios(config);
+  return response.data.data;
 };
 
-// Function to get data from a sheet
+// Function to get data (only for products)
 export const getData = async (sheetName) => {
-  const endpoint = `?sheet=${sheetName}`;
-  return await request('GET', endpoint);
+  if (sheetName === "products") {
+    const endpoint = `/products`;
+    return await request('GET', endpoint);
+  }
+  throw new Error("Retrieval not allowed for this sheet.");
 };
 
-// Function to create a new record
+// Function to get a single record by ID
+export const getById = async (sheetName, id) => {
+  if (sheetName === "products") {
+    const endpoint = `/products/${id}`;
+    return await request('GET', endpoint);
+  }
+  throw new Error("Retrieval by ID is not allowed for this sheet.");
+};
+
+// Function to create a new record (only for orders)
 export const createRecord = async (sheetName, data) => {
-  const endpoint = `?sheet=${sheetName}`;
-  return await request('POST', endpoint, data);
+  if (sheetName === "orders") {
+    const endpoint = `/orders`;
+    return await request('POST', endpoint, data);
+  }
+  throw new Error("Creation not allowed for this sheet.");
 };
 
 // Function to update an existing record
 export const updateRecord = async (sheetName, data) => {
-  const endpoint = `?sheet=${sheetName}`;
-  return await request('PUT', endpoint, data);
+  if (sheetName === "products") {
+    const endpoint = `/products`;
+    return await request('PUT', endpoint, data);
+  } else if (sheetName === "orders") {
+    const endpoint = `/orders`;
+    return await request('PUT', endpoint, data);
+  }
+  throw new Error("Update not allowed for this sheet.");
 };
-
-// Function to delete a record
-export const deleteRecord = async (sheetName, id) => {
-  const endpoint = `?sheet=${sheetName}&uuid=${id}`;
-  return await request('DELETE', endpoint);
-};
-
 
 // Function to search for products by text
 export const searchProducts = async (searchText) => {
-  const endpoint = `?search=${encodeURIComponent(searchText)}`; 
-  return await request('GET', endpoint); 
+  const endpoint = `/products?search=${encodeURIComponent(searchText)}`;
+  return await request('GET', endpoint);
+};
+
+// Attempting to delete a record will now throw an error
+export const deleteRecord = async () => {
+  throw new Error("Deletion is not allowed for any endpoint.");
 };

@@ -4,17 +4,17 @@ import './Styles/Products.css';
 import Card from './SemiComponents/Card';
 import Footer from './SemiComponents/Footer';
 import Navbar from './SemiComponents/Navbar';
-import { getData } from '../Utils/db'; // Utility function to fetch data from Google Sheets
-import Loader from './SemiComponents/Loader'; // Import the Loader component
+import { getData } from '../Utils/db';
+import Loader from './SemiComponents/Loader';
 
 function Products() {
   const navigate = useNavigate();
   const [allProducts, setAllProducts] = useState([]);
-  const [loading, setLoading] = useState(true); // State to manage loading
-  const [imageLoaded, setImageLoaded] = useState(false); // State to manage image loading
+  const [loading, setLoading] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const selectProductAndNavigate = (product) => {
-    navigate(`/products/${product.title}${product.uuid}`, { state: { selectedProduct: product } });
+    navigate(`/products/${product.title}?id=${product.uuid}`, { state: { selectedProduct: product } });
   };
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function Products() {
   const getDataFromSheets = async () => {
     try {
       const data = await getData('products');
+      console.log(data);
       return data || [];
     } catch (error) {
       console.error('Error retrieving data from Google Sheets:', error);
@@ -51,7 +52,7 @@ function Products() {
     <div>
       <Navbar />
       {loading ? (
-        <Loader /> // Display loader while data is being fetched
+        <Loader /> 
       ) : (
         <div className='products'>
           {allProducts.map((item, key) => (

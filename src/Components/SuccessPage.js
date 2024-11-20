@@ -6,7 +6,7 @@ export default function SuccessPage() {
     const [remainingSeconds, setRemainingSeconds] = useState(10);
     const navigate = useNavigate();
     const location = useLocation();
-    const item = location.state?.item;
+    const item = location.state?.itemName;
 
     useEffect(() => {
         if (!item) {
@@ -39,7 +39,7 @@ export default function SuccessPage() {
                 style={{ width: "300px", height: "300px" }}
                 autoplay
             ></lottie-player>
-            <h1 className="success-message">Your purchase of {item.item} was successful!</h1>
+            <h1 className="success-message">Your purchase of {item} was successful!</h1>
             <p className="redirect-message">
                 You will be redirected to the products page in {remainingSeconds} seconds
             </p>

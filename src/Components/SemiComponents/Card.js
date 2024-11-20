@@ -10,7 +10,7 @@ function Card(props) {
 
   const getHrefFromSrc = (src) => {
     const matches = src.match(/https:\/\/i\.ibb\.co\/([a-zA-Z0-9]+)\/.*/);
-    return matches ? `https://ibb.co/${matches[1]}` : '#'; // Return the modified URL or a fallback
+    return matches ? `https://ibb.co/${matches[1]}` : '#';
   };
 
   const href = getHrefFromSrc(props.image);

@@ -11,8 +11,10 @@ function extractKeywords(product) {
     return keywords;
   }
   
-  export function findRelatedProducts(selectedProduct, ProductsData) {
+  export function findRelatedProducts(selectedProduct, ProductsData = null) {
     const relatedProducts = [];
+
+    if (!ProductsData) return null;
   
     if (!selectedProduct || !selectedProduct.name || !selectedProduct.description) {
       return ProductsData.slice(-3); // Return the last 3 products if there's an error or missing data
