@@ -19,7 +19,14 @@ function Card(props) {
     <div className='card'>
       <div className='card-image-container'>
         {loadingImage && <div className='image-placeholder'>Loading...</div>}
-        <a href={href}>
+        <a
+          onClick={(e) => {
+            e.preventDefault(); 
+            if (props.onClick) {
+              props.onClick();
+            }
+          }}
+        >
           <img
             src={props.image}
             alt={props.title}

@@ -10,6 +10,7 @@ import './Styles/SelectedProduct.css';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import Loader from './SemiComponents/Loader';
+import { Helmet } from 'react-helmet'; // Import Helmet
 
 // Function to format description using Markdown
 const formatDescription = (description) => {
@@ -34,6 +35,9 @@ function SelectedProduct() {
   const [error, setError] = useState(null); // Track errors
 
   useEffect(() => {
+    // Scroll to top when navigating to this page
+    window.scrollTo(0, 0); // Scrolls the window to the top
+
     // Fetch product if not passed via state
     const fetchProduct = async () => {
       try {
@@ -92,6 +96,19 @@ function SelectedProduct() {
 
   return (
     <div className="selected-product-container">
+      {/* Helmet to set dynamic head meta tags */}
+      <Helmet>
+        <title>{selectedProduct.title} | Maximum Health</title>
+        <meta name="description" content={selectedProduct.description || 'Product details page for Maximum Health.'} />
+        <meta property="og:title" content={selectedProduct.title} />
+        <meta property="og:description" content={selectedProduct.description || 'Product details page for Maximum Health.'} />
+        <meta property="og:image" content={selectedProduct.imageURL || '/default-image.jpg'} />
+        <meta property="og:url" content={window.location.href} />
+        <meta name="twitter:title" content={selectedProduct.title} />
+        <meta name="twitter:description" content={selectedProduct.description || 'Product details page for Maximum Health.'} />
+        <meta name="twitter:image" content={selectedProduct.imageURL || '/default-image.jpg'} />
+      </Helmet>
+
       <Navbar />
       {selectedProduct && selectedProduct.title ? (
         <div className="product-details">

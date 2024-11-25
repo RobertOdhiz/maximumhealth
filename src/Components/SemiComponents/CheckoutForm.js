@@ -54,7 +54,7 @@ function CheckoutForm({ item }) {
                 });
                 
                 // Navigate to SuccessPage and pass the item data
-                navigate('/success', { state: { item: postData, itemName: item.title } });
+                navigate('/success', { state: { item: postData, itemName: item.title, price: item.price } });
             } else {
                 toast.error('Failed to place order. Please try again.');
             }
