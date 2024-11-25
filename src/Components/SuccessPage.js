@@ -18,12 +18,16 @@ export default function SuccessPage() {
         }
 
         // Track the purchase event using MetaPixel
-        fbq("track", "Purchase", {
-            value: price,
-            currency: currency,
-            content_ids: [item],
-            content_type: "product",
-        });
+        if (window.fbq) {
+            window.fbq("track", "Purchase", {
+                value: price,
+                currency: currency,
+                content_ids: [item],
+                content_type: "product",
+            });
+        } else {
+            console.error("Facebook Pixel 'fbq' function not found.");
+        }        
 
         // Start the countdown for redirection
         const countdown = setInterval(() => {

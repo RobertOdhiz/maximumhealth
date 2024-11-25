@@ -18,8 +18,9 @@ const MetaPixel = ({ event = "PageView", eventData = {} }) => {
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '7553369394757926');
-        ${eventScript}`}
+        window.fbq('init', '7553369394757926');
+        ${eventScript}`
+        }
       </script>
       <noscript id="facebook-pixel-image">
         {`<img height="1" width="1" style="display:none"
