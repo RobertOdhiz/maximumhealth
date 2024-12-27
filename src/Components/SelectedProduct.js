@@ -26,17 +26,17 @@ function SelectedProduct() {
 
   // Extract query parameters
   const queryParams = new URLSearchParams(location.search);
-  const uuid = queryParams.get('id'); // Extract `id` from query parameters
+  const uuid = queryParams.get('id');
 
   const { selectedProduct: stateProduct, relatedProducts: stateRelatedProducts } = location.state || {};
   const [selectedProduct, setSelectedProduct] = useState(stateProduct || { title: '', description: '', price: 0, imageURL: '' });
   const [relatedProducts, setRelatedProducts] = useState(stateRelatedProducts || []);
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [error, setError] = useState(null); // Track errors
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Scroll to top when navigating to this page
-    window.scrollTo(0, 0); // Scrolls the window to the top
+    window.scrollTo(0, 0);
 
     // Fetch product if not passed via state
     const fetchProduct = async () => {
@@ -49,7 +49,7 @@ function SelectedProduct() {
         // Fetch related products
         const related = findRelatedProducts(product);
         setRelatedProducts(related || []);
-        setError(null); // Clear any previous errors
+        setError(null);
       } catch (err) {
         console.error(err.message);
         setError(err.message);
@@ -69,9 +69,13 @@ function SelectedProduct() {
   };
 
   const selectProductAndNavigate = (product) => {
-    navigate(`/products/${product.title}?id=${product.uuid}`, {
-      state: { selectedProduct: product, relatedProducts: findRelatedProducts(product) },
-    });
+    // navigate(`/products/${product.title}?id=${product.uuid}`, {
+    //   state: { selectedProduct: product, relatedProducts: findRelatedProducts(product) },
+    // });
+    setSelectedProduct(product);
+    const related = findRelatedProducts(product);
+    setRelatedProducts(related || []);
+    window.scrollTo(0, 0);
   };
 
   const getHrefFromSrc = (src) => {

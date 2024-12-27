@@ -11,11 +11,11 @@
   padding: 1.5em;
   overflow: hidden;
   flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping for description positioning */
 }
 
 .product-image {
-  flex: 0 0 auto;
-  width: 35%;
+  flex: 0 0 35%;
   max-height: 400px;
 }
 
@@ -27,11 +27,12 @@
 }
 
 .product-info-container {
-  flex: 1;
+  flex: 0 0 60%;
   min-height: 80vh;
   padding-right: 1em;
   display: flex;
   flex-direction: column;
+  order: 1; /* Default order for product info */
 }
 
 .product-info {
@@ -49,6 +50,8 @@
   font-size: 1em;
   color: #666;
   margin-top: 1em;
+  order: 2; /* Place description below image on larger screens */
+  width: 100%; /* Full width for description */
 }
 
 .product-price {
@@ -92,6 +95,36 @@
 }
 
 /* Media Queries */
+@media (max-width: 1024px) {
+  .product-details {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-image {
+    width: 80%;
+  }
+
+  .product-info-container {
+    padding: 0;
+    width: 100%;
+    order: 0; /* Reset order for smaller screens */
+  }
+
+  .product-description {
+    order: 0; /* Keep description in default position */
+  }
+
+  .product-info h1 {
+    font-size: 1.8em;
+  }
+
+  .products-list .card {
+    flex: 1 1 calc(50% - 1em); /* Display two cards per row */
+  }
+}
+
 @media (max-width: 768px) {
   .product-details {
     flex-direction: column; /* Stack items vertically */
@@ -106,6 +139,11 @@
   .product-info-container {
     padding: 0;
     width: 100%;
+    order: 0; /* Reset order for smaller screens */
+  }
+
+  .product-description {
+    order: 0; /* Keep description in default position */
   }
 
   .product-info h1 {

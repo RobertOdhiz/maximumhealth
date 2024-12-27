@@ -96,13 +96,13 @@
 
 .products {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 1em;
-  padding: 1em 1.5em;
-  /* width: 100%; */
+  /* padding: 1em 1.5em; */
+  width: 100vw;
 }
 
 .products img {
